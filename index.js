@@ -18,6 +18,10 @@ app.set('views', 'views')
 
 app.use(todoRoutes)
 
+app.listen(PORT, () => {
+  console.log('Server has been started...' + PORT)
+})
+
 async function start() {
   try {
     await mongoose.connect(URL, {
