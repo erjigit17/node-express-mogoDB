@@ -1,14 +1,24 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 
 const PORT = process.env.PORT || 3000
-const URL = 'mongod --config /opt/homebrew/etc/mongod.conf'
+const URL = 'mongodb+srv://root:j!5hvm$5+-X9H9T@cluster0.mpxkg.mongodb.net/todos'
 
 const app = express()
+const hbs = exphbs.create({
+  defaultLayout: 'main',
+  extname: 'hbs'
+})
+
+app.engine('hbs', hbs.engine)
+app.set('view engine', 'hbs')
+app.set('views', 'views')
+
 
 async function start() {
   try {
-    await mongoose.connect('', {
+    await mongoose.connect(URL, {
       userNewUrlParser: true,
       userFindAndModify: false,
     })
